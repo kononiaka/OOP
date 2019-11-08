@@ -114,7 +114,7 @@ if ("radius" in circle) {
   console.log("Circle has a radius");
 }
 
-//LESSON 10 Abstraction - hide complexity and show essentials
+//LESSON 11 Abstraction - hide complexity and show essentials
 
 function Circle(radius) {
   this.radius = radius;
@@ -124,55 +124,35 @@ function Circle(radius) {
   };
   this.draw = function() {
     let a,
-      b = 0; //this variables die after executing, cause it's scope
-    computeOptimumLocation(0, 1); //don't to use this 'cause JS uses closure
+      b = 0; //this variables die after executing, 'cause it's scope
+    computeOptimumLocation(0, 1); //don't need to use "this" 'cause JS uses closure
     //defaultLocation
     //this.radius
     console.log("draw");
   };
 }
+//LESSON 12 getters/setters
+function Circle(radius) {
+  this.radius = radius;
+  let defaultLocation = { x: 1, y: 1 };
 
+  this.getDefaultLocation = function() {
+    return defaultLocation;
+  }; //the same and more accurate would be to use getter
+  Object.defineProperty(this, "defaultLocation", {
+    //get (read only) property. 1st arg: object whom we are reference to; 2nd: property name; 3rd: descriptor
+    get: () => defaultLocation,
+    set: function(value) {
+      //set property needs to have argument of value inside function
+      if (!value.x || !value.y) {
+        throw new Error("Invalid location");
+      }
 
-function StopWatch() {
-  let startTime,
-    endTime,
-    duration = 0;
-  running = false;
-
-  this.start = function() {
-    if (running) console.log("Timer already has been started");
-
-    running = true;
-
-    startTime = new Date();
+      defaultLocation = value;
+    }
+  });
+  this.draw = function() {
+    console.log("draw");
   };
-
-  this.stop = function() {
-    if (!running) console.log("Timer hasn't been started");
-
-    running = false;
-
-    endTime = new Date();
-
-    const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
-
-    duration += seconds;
-  };
-
-  this.reset = function() {
-    startTime = 0;
-    endTime = 0;
-    duration = 0;
-    running = false;
-
-    console.log(startTime, endTime, duration);
-  };
-
-  // Object.defineProperty(this, "duration", {
-  //   get: function() {
-  //     return duration;
-  //   }
-  // });
 }
-
-let sw = new StopWatch();
+let circle3 = new Circle(15);
