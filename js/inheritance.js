@@ -25,8 +25,34 @@ console.log(person);
 let array = [];
 
 Object.getPrototypeOf(array);  //the same as array.__proto__
+array.__proto__ //objectBase
+Array.prototype; //the same as Object.getPrototypeOf(array) or array.__proto__;
 
 let arr = new Array();
-Array.prototype;
-arr.constructor.prototype;
+Array.prototype //the same as arrayBase;
+*/
+
+/*LESSON 6
+function Circle(radius) {
+  //instance members
+  this.radius = radius;
+
+  this.move = function() {
+      // this.draw();
+    console.log("move");
+  };
+}
+
+//prototype members
+Circle.prototype.draw = function() {
+  this.move(); //you could easily call instance member method in prototype and awkward
+  console.log("draw");
+};
+
+//even if there is another method of toString() it would be overwrite for more accessible one
+Circle.prototype.toString = function() {
+  return `Circle has radius ${this.radius}`;
+};
+let c1 = new Circle(1);
+let c2 = new Circle(2);
 */
