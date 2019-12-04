@@ -56,3 +56,38 @@ Circle.prototype.toString = function() {
 let c1 = new Circle(1);
 let c2 = new Circle(2);
 */
+
+//LESSON 7
+
+function Circle(radius) {
+  this.radius = radius;
+
+  this.draw = function() {
+    console.log("draw");
+  };
+}
+
+let c1 = new Circle(5);
+
+//doesn't matter when you modify the property of the prototype (object references)
+Circle.prototype.move = function() {
+  console.log("move");
+};
+
+//returns instance members
+console.log(Object.keys(c1));
+
+//returns all members (instance + prototype)
+for (let key in c1) console.log(key);
+
+c1.hasOwnProperty("radius"); //true (instance member)
+c1.hasOwnProperty("draw"); //false (prototype member/property)
+
+//LESSON 8
+//Never modify objects you don't know; never add or change an existing methods
+Array.prototype.shuffle = function() {
+  //...
+};
+
+const array = [];
+array.shuffle();
