@@ -33,36 +33,25 @@
 //
 // let sw = new Stopwatch();
 
-// let sw = new Stopwatch();
-//
-// function Stopwatch() {
-//   this.duration = 0;
-// }
-//
-// Stopwatch.prototype.start = function() {
-//   if (this.running) throw new Error("Stopwatch already been started");
-//
-//   this.running = true;
-//   startTime = new Date().getTime();
-// };
-// Stopwatch.prototype.stop = function() {
-//   if (!this.running) throw new Error(`Stopwatch haven't been started yet`);
-//
-//   this.running = false;
-//   stopTime = new Date().getTime();
-//   let seconds = (stopTime - startTime) / 1000;
-//   this.duration += seconds;
-// };
-//
-// Stopwatch.prototype.reset = function() {
-//   startTime = null;
-//   stopTime = null;
-//   this.running = false;
-//   this.duration = 0;
-// };
-// Object.defineProperty(this, "running", {
-//   get: () => running
-// });
-// Object.defineProperty(this, "duration", {
-//   get: () => duration
-// });
+Stopwatch.prototype.start = function() {
+  if (this.running) throw new Error("Stopwatch already been started");
+
+  this.running = true;
+
+  this.startTime = new Date().getTime();
+};
+Stopwatch.prototype.stop = function() {
+  if (!this.running) throw new Error(`Stopwatch haven't been started yet`);
+
+  this.running = false;
+  this.stopTime = new Date().getTime();
+  let seconds = (this.stopTime - this.startTime) / 1000;
+  this.duration += seconds;
+};
+
+Stopwatch.prototype.reset = function() {
+  this.startTime = null;
+  this.stopTime = null;
+  this.running = false;
+  this.duration = 0;
+};
