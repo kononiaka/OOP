@@ -151,13 +151,13 @@ Avoid creating inheritance hierarchies
 Favor Composition over Inheritance - Use mixins to achieve composition
  */
 
-/*LESSON 8 Mixins
+/*LESSON 8 Mixins or Composition
 function mixin(target, ...sources) { //rest operator
   Object.assign(target.prototype, ...sources); //spread operator
 }
 let canEat = {
   eat: function() {
-    hunger--;
+    this.hunger--;
     console.log("eating");
   }
 };
@@ -176,9 +176,65 @@ function Goldfish() {}
 
 function Person() {}
 
-mixin(Person, canWalk, canEat);
-mixin(Goldfish, canEat, canSwim);
+mixin(Person, canWalk, canEat); //Object.assign(Person.prototype, canWalk, canEat)
+mixin(Goldfish, canEat, canSwim); //Object.assign(Goldfish.prototype, canEat, canSwim)
 
 let p = new Person();
 let g = new Goldfish();
 */
+
+//EXERCISE 1
+
+function HtmlElement() {
+  this.click = function() {
+    console.log("clicked");
+  };
+}
+
+HtmlElement.prototype.focus = function() {
+  console.log("focused");
+};
+
+function HtmlSelectElement(items = []) {
+  this.addItem = function(item) {
+    this.items.push(item);
+  };
+  this.items = items;
+  this.removeItem = function(item) {
+    this.items.splice(items.indexOf(item), 1);
+  };
+  this.render = function() {
+    console.log(
+      this.items.reduce(function(acc, item, i) {
+        if (i == 0) return "<section>\n" + acc + "<option>" + item + "</option>\n";
+        if (i == items.length - 1) {
+          return acc + "<option>" + item + "</option>\n" + "</section>";
+        }
+        return acc + "<option>" + item + "</option>\n";
+      }, "")
+    );
+  };
+}
+HtmlSelectElement.prototype = new HtmlElement();
+HtmlSelectElement.prototype.constructor = HtmlElement;
+
+//EXERCISE 2
+
+function HtmlImageElement(src) {
+  this.render = function() {
+    //console.log("<img1 src= " + this.src + " />");
+    return `<img src= "${src}" /> `
+  };
+  this.src = `"${src}"`;
+}
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
+
+let elements = [
+  new HtmlSelectElement([1, 2, 3]),
+  new HtmlImageElement("http://")
+];
+
+for (elem of elements) {
+  elem.render()
+}
