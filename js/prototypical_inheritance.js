@@ -186,33 +186,36 @@ let g = new Goldfish();
 //EXERCISE 1
 
 function HtmlElement() {
-  this.click = function() {
+  this.click = function () {
     console.log("clicked");
   };
 }
 
-HtmlElement.prototype.focus = function() {
+HtmlElement.prototype.focus = function () {
   console.log("focused");
 };
 
 function HtmlSelectElement(items = []) {
-  this.addItem = function(item) {
+  this.addItem = function (item) {
     this.items.push(item);
   };
   this.items = items;
-  this.removeItem = function(item) {
+  this.removeItem = function (item) {
     this.items.splice(items.indexOf(item), 1);
   };
-  this.render = function() {
-    console.log(
-      this.items.reduce(function(acc, item, i) {
-        if (i == 0) return "<section>\n" + acc + "<option>" + item + "</option>\n";
-        if (i == items.length - 1) {
-          return acc + "<option>" + item + "</option>\n" + "</section>";
-        }
-        return acc + "<option>" + item + "</option>\n";
-      }, "")
-    );
+  this.render = function () {
+    // this.items.reduce(function(acc, item, i) {
+    //   let a = acc + "<option>" + item + "</option>\n";
+    //   if (i == 0) return "<section>\n" + a;
+    //   if (i == items.length - 1) {
+    //     return a + "</section>";
+    //   }
+    //   return a;
+    // }, "");
+    // console.log(this.items);
+    `${this.items.map(item => {
+      return console.log(`< option > ${item} </options > `);
+    })}`;
   };
 }
 HtmlSelectElement.prototype = new HtmlElement();
@@ -221,11 +224,10 @@ HtmlSelectElement.prototype.constructor = HtmlElement;
 //EXERCISE 2
 
 function HtmlImageElement(src) {
-  this.render = function() {
-    //console.log("<img1 src= " + this.src + " />");
-    return `<img src= "${src}" /> `
+  this.src = src;
+  this.render = function () {
+    return console.log(`<img src= "${this.src}" /> `);
   };
-  this.src = `"${src}"`;
 }
 HtmlImageElement.prototype = new HtmlElement();
 HtmlImageElement.prototype.constructor = HtmlImageElement;
@@ -236,5 +238,5 @@ let elements = [
 ];
 
 for (elem of elements) {
-  elem.render()
+  elem.render();
 }
