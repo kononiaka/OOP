@@ -183,7 +183,7 @@ let p = new Person();
 let g = new Goldfish();
 */
 
-//EXERCISE 1
+/*EXERCISE 1
 
 function HtmlElement() {
   this.click = function () {
@@ -213,20 +213,22 @@ function HtmlSelectElement(items = []) {
     //   return a;
     // }, "");
     // console.log(this.items);
-    `${this.items.map(item => {
-      return console.log(`< option > ${item} </options > `);
-    })}`;
+    return console.log(`
+    <select> ${this.items.map(item =>`
+      <option>${item}</option>`).join('')}
+    </select>`)
   };
 }
 HtmlSelectElement.prototype = new HtmlElement();
 HtmlSelectElement.prototype.constructor = HtmlElement;
+*/
 
-//EXERCISE 2
+/*EXERCISE 2
 
 function HtmlImageElement(src) {
   this.src = src;
   this.render = function () {
-    return console.log(`<img src= "${this.src}" /> `);
+    return console.log(`< img src = "${this.src}" /> `);
   };
 }
 HtmlImageElement.prototype = new HtmlElement();
@@ -240,3 +242,4 @@ let elements = [
 for (elem of elements) {
   elem.render();
 }
+*/ 
