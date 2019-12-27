@@ -21,14 +21,37 @@ const c = new Circle(2)
 //Function Declaration are hoisted (raised to the top)
 function sayHello() {}
 
+// const c = new Circle()
+
 //Function Expression not hoisted
-const sayGoodbye = function () {};
+// const sayGoodbye = function () {};
 const number = 1;
 
-const c = new Circle()
 // Class Declaration are not hoisted
 class Circle {}
 
-//Class Expression hoisted, but try not to use it
+console.log(square);
+
+//Class Expression not hoisted, try not to use it
 const square = class {}
+*/
+
+/*Excercise 3 Static Method
+
+ class Circle {
+    constructor(radius) {
+        this.radius = radius
+    }
+
+    //Instance method; object instance
+    draw() {}
+
+    //Static method; only Class instance
+    static parse(str) {
+        let radius = JSON.parse(str).radius
+        return new Circle(radius)
+    }
+}
+let c = Circle.parse('{"radius": 10}')
+
 */
