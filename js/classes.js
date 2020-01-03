@@ -55,3 +55,70 @@ const square = class {}
 let c = Circle.parse('{"radius": 10}')
 
 */
+
+/*LESSON 4 Keyword "this"
+const Circle = function () {
+    this.draw = function () {
+        console.log(this) //"this" will point on object
+    }
+}
+let c = new Circle() //without new "this" will point in a global object
+
+// //Method call
+let draw = c.draw;
+console.log(draw)
+
+// //Function call
+draw() 
+
+// 'use strict' // will hide global object in undefined, not to change global object
+
+class Circle {
+    draw() {
+        console.log(this)
+    }
+}
+
+let c = new Circle;
+let draw = c.draw;
+console.log(draw);
+draw() //in classes we are not using strict mode, it goes by a default
+*/
+
+/*LESSON 5 Private properties and methods
+
+//the underscore - is just a naming convension
+let _radius = Symbol()
+let _draw = Symbol()
+
+class Circle {
+    constructor(radius) {
+        //this.radius = radius // this['radius'] = radius is totally the same 
+        this[_radius] = radius
+    }
+    _draw() {
+        console.log('draw')
+    }
+}
+
+let c = new Circle(5);
+let key = Object.getOwnPropertySymbols(c)[0]
+console.log(c[key]);
+*/
+
+//LESSON 6 private methods via WeakMap
+
+let _radius = new WeakMap()
+let _draw = new WeakMap()
+console.log(_radius);
+
+class Circle {
+    constructor(radius) {
+        _radius.set(this, radius)
+        _draw.set(this, function () {
+            console.log('move', this);
+        })
+    }
+}
+
+let c = new Circle(1)
