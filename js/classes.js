@@ -106,18 +106,37 @@ let key = Object.getOwnPropertySymbols(c)[0]
 console.log(c[key]);
 */
 
-//LESSON 6 private methods via WeakMap
+/*LESSON 6 private methods via WeakMap
 
 let _radius = new WeakMap()
-let _draw = new WeakMap()
-console.log(_radius);
+let _move = new WeakMap()
 
 class Circle {
     constructor(radius) {
         _radius.set(this, radius)
-        _draw.set(this, function () {
+        _move.set(this, () => {
             console.log('move', this);
         })
+    }
+    draw() {
+        _move.get(this)()
+        console.log(_radius.get(this))
+    }
+}
+
+let c = new Circle(1)
+*/
+
+//LESSON 7 Getters and setters in classes
+
+let _radius = new WeakMap();
+
+class Circle {
+    constructor(radius) {
+        _radius.set(this, radius)
+    }
+    getRadius() {
+        _radius.get(this)
     }
 }
 
