@@ -127,7 +127,7 @@ class Circle {
 let c = new Circle(1)
 */
 
-//LESSON 7 Getters and setters in classes
+/*LESSON 7 Getters and setters in classes
 
 let _radius = new WeakMap();
 
@@ -135,9 +135,61 @@ class Circle {
     constructor(radius) {
         _radius.set(this, radius)
     }
-    getRadius() {
-        _radius.get(this)
+
+    get radius() {
+        return _radius.get(this)
+    }
+
+    set radius(value) {
+        if (value <= 0) throw new Error('invalid radius')
+        return _radius.set(this, value)
     }
 }
 
 let c = new Circle(1)
+*/
+
+/*LESSON 8 Inheritance in classes
+
+class Shape {
+    constructor(color) {
+        this.color = color;
+    }
+    move() {
+        console.log('move');
+    }
+}
+
+class Circle extends Shape {
+    constructor(color, radius) {
+        super(color)
+        this.radius = radius;
+    }
+    draw() {
+        console.log('draw');
+    }
+}
+
+let c = new Circle('red', 1)
+*/
+
+/*LESSON 9 Overriding methods
+
+class Shape {
+    move() {
+        console.log('move');
+    }
+}
+
+class Circle extends Shape {
+    move() {
+        super.move()
+        console.log('circle draw');
+    }
+}
+
+let c = new Circle ()
+*/
+
+let _radius = new WeakMap()
+
